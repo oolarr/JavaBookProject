@@ -1,0 +1,15 @@
+package com.book.app;
+
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.ComponentScan;
+
+@ComponentScan
+@SpringBootApplication
+public class BookProjectApplication {
+
+	public static void main(String[] args) {
+		SpringApplication.run(BookProjectApplication.class, args);
+	}
+
+}
