@@ -7,5 +7,7 @@ import com.book.persistence.domain.Book;
 
 @Repository
 public interface BookRepo extends JpaRepository<Book, Long>{
+	
+	
 
 }
