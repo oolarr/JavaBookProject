@@ -1,51 +1,39 @@
 package com.book.persistence.domain;
 
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 import org.springframework.stereotype.Component;
-
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 @Component
 @Entity
-@Table(name = "book_tbl")
+@Table
 public class Book {
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
-	
 
+
+	private long id;
 	private String title;
-	
-	
+	public Book(String title, String isbn, int year) {
+		super();
+		this.title = title;
+		this.isbn = isbn;
+		this.year = year;
+	}
+
 	private String isbn;
 	private int year;
 	
-	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
-	@JoinTable(name = "bookauthors",
-		joinColumns = {
-				@JoinColumn(name = "book_id", referencedColumnName = "id")
-		},
-		inverseJoinColumns = {
-				@JoinColumn(name = "author_id", referencedColumnName = "id")
-		})
+	private Set<Author> authors = new HashSet<>();
 	
-	private List<Author> authors;
-	public Long getId() {
+	
+	
+	public long getId() {
 		return id;
 	}
 
-	public void setId(Long id) {
+	public void setId(long id) {
 		this.id = id;
 	}
 
@@ -73,13 +61,14 @@ public class Book {
 		this.year = year;
 	}
 
-	public List<Author> getAuthors() {
+	public Set<Author> getAuthors() {
 		return authors;
 	}
 
-	public void setAuthors(List<Author> authors) {
+	public void setAuthors(Set<Author> authors) {
 		this.authors = authors;
 	}
+	
 	
 
 }
