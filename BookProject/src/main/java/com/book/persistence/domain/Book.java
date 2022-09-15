@@ -3,29 +3,47 @@ package com.book.persistence.domain;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 import org.springframework.stereotype.Component;
 @Component
 @Entity
-@Table
+@Table(name = "book_table")
 public class Book {
-
-
+	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
 	private String title;
+	
+
+	private String isbn;
+	private int year;
+	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@JoinTable(name = "book_authors",
+	joinColumns = {@JoinColumn(name = "book_id")},
+	inverseJoinColumns = {@JoinColumn (name = "author_id")})
+	private Set<Author> authors = new HashSet<>();
+	
+	public Book() {
+		
+	}
+	
 	public Book(String title, String isbn, int year) {
 		super();
 		this.title = title;
 		this.isbn = isbn;
 		this.year = year;
 	}
-
-	private String isbn;
-	private int year;
-	
-	private Set<Author> authors = new HashSet<>();
 	
 	
 	

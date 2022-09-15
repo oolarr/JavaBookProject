@@ -1,7 +1,8 @@
 package com.book.persistence.domain;
 
-import java.util.List;
+import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -12,11 +13,11 @@ import javax.persistence.Table;
 
 import org.springframework.stereotype.Component;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Component
 @Entity
-@Table(name = "author_tbl")
+@Table(name = "author_table")
 
 public class Author {
 	@Id
@@ -27,8 +28,22 @@ public class Author {
 	private String name;
 	
 	
-	@ManyToMany(mappedBy = "authors", fetch = FetchType.LAZY)
-	private List<Book> books;
+	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "authors")
+	@JsonIgnore
+	private Set<Book> books;
+
+
+	public Author() {
+		super();
+	}
+
+
+	public Author(String name) {
+		super();
+		this.name = name;
+	}
+
+
 	public Long getId() {
 		return id;
 	}
@@ -49,13 +64,14 @@ public class Author {
 	}
 
 
-	public List<Book> getBooks() {
+	public Set<Book> getBooks() {
 		return books;
 	}
 
 
-	public void setBooks(List<Book> books) {
+	public void setBooks(Set<Book> books) {
 		this.books = books;
 	}
+	
 
 }

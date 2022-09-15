@@ -2,6 +2,7 @@ package com.book.app.services;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 import org.modelmapper.ModelMapper;
@@ -43,7 +44,7 @@ public class BookService {
 		return this.mapToDTO(saved);
 	}
 	
-	public List<Author> getAuthors(Long id, Book book) {
+	public Set<Author> getAuthors(Long id, Book book) {
 		Optional<Book> existingOptional = this.repo.findById(id);
 		Book existing = existingOptional.get();
 		return existing.getAuthors();
@@ -65,10 +66,10 @@ public class BookService {
 		Optional<Book> existingOptional = this.repo.findById(id);
 		Book existing = existingOptional.get();
 		
-//		existing.setTitle(newBook.getTitle());
-//		existing.setAuthor(newBook.getAuthor());
-//		existing.setIsbn(newBook.getIsbn());
-//		existing.setYear(newBook.getYear());
+		existing.setTitle(newBook.getTitle());
+		existing.setAuthors(newBook.getAuthors());
+		existing.setIsbn(newBook.getIsbn());
+		existing.setYear(newBook.getYear());
 		
 		Book updated = this.repo.save(existing);
 		return this.mapToDTO(updated);
