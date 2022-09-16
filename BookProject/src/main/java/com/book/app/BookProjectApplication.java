@@ -10,7 +10,7 @@ import com.book.rest.BookController;
 @ComponentScan
 @ComponentScan(basePackageClasses = BookController.class)
 @EnableJpaRepositories("com.book.persistence.repo")
-@EntityScan({"com.book.persistence.domain","com.book.persistence.domain.BookRepo"})
+@EntityScan("com")
 @SpringBootApplication
 public class BookProjectApplication {
 
