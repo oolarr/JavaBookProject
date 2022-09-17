@@ -1,0 +1,4 @@
+-------------------------------------------------------------------------------
+Test set: com.book.app.BookApplicationIntegrationTest
+-------------------------------------------------------------------------------
+Tests run: 3, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 5.286 s - in com.book.app.BookApplicationIntegrationTest
