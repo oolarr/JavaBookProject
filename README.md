@@ -1,7 +1,7 @@
 ## Project Scope
 A REST API Microservices application created using Spring Boot framework in Java, implementing CRUD functionality to store, read, update and delete book data from a database. The purpose of this project is to demonstrate the knowledge and skills I have gained during my software development bootcamp at QA.
 
-# Stacks and Tools
+## Stacks and Tools
 * Java
 * Spring Boot
 * Maven
