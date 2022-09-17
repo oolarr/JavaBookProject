@@ -11,6 +11,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PathVariable;
 
+import com.book.app.exceptions.ResourceNotFoundException;
 import com.book.persistence.domain.Author;
 import com.book.persistence.domain.Book;
 import com.book.persistence.domain.BookDTO;
@@ -51,7 +52,8 @@ public class BookService {
 	}
 	
 	public Optional<Book> findBook(Long id) {
-		return repo.findById(id);
+		return Optional.of(repo.findById(id)
+				.orElseThrow(() -> new ResourceNotFoundException("Not found Book with id " +id)));
 	}
 	
 	public List<Author> findAuthorByNameContaining(@PathVariable String name){
@@ -63,7 +65,8 @@ public class BookService {
 	}
 	
 	public BookDTO updateBook(Long id, Book newBook) {
-		Optional<Book> existingOptional = this.repo.findById(id);
+		Optional<Book> existingOptional = Optional.of(this.repo.findById(id)
+				.orElseThrow(() -> new ResourceNotFoundException("Not found Book with id " +id)));
 		Book existing = existingOptional.get();
 		
 		existing.setTitle(newBook.getTitle());
